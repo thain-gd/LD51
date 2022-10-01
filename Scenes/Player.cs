@@ -1,15 +1,17 @@
 using Godot;
 using System;
 
-public class Player : AnimatedSprite
+public class Player : Area2D
 {
     [Export]
     public int Speed = 400;
 
+    private AnimatedSprite _animatedSprite;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
     }
 
     public override void _Process(float delta)
@@ -39,11 +41,11 @@ public class Player : AnimatedSprite
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            Play();
+            _animatedSprite.Play();
         }
         else
         {
-            Stop();
+            _animatedSprite.Stop();
         }
 
         Position += velocity * delta;
