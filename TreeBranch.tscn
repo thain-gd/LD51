@@ -5,6 +5,6 @@
 [node name="TreeBranch" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -55.75 )
-scale = Vector2( 0.156863, 2.44118 )
+position = Vector2( 0, -42.25 )
+scale = Vector2( 0.156863, 1.91176 )
 texture = ExtResource( 1 )

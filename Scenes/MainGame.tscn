@@ -10,12 +10,11 @@
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource( 3 )
+treePrefab = ExtResource( 5 )
 
 [node name="Background" type="Sprite" parent="GameController"]
 texture = ExtResource( 1 )
 script = ExtResource( 4 )
-
-[node name="Tree" parent="GameController" instance=ExtResource( 5 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 visible = false

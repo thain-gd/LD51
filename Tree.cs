@@ -7,10 +7,10 @@ public class Tree : Node2D
     private PackedScene treeBranchPrefab;
 
     [Export]
-    private float minYOffset;
+    private float minYOffset = 25;
 
     [Export]
-    private float maxYOffset;
+    private float maxYOffset = 40;
 
     [Export]
     private float minRotation;
@@ -20,14 +20,32 @@ public class Tree : Node2D
 
     private static int branchNumbers = 5;
 
-    // Called when the node enters the scene tree for the first time.
+    private float TreeHeight;
+
     public override void _Ready()
     {
-        bool isLeftBranch = System.Math.Round(GD.Randf()) == 0;
-        float yPos = -10;
+        GetTreeHeight();
+        SpawnBranches();
+    }
+
+    private void GetTreeHeight()
+    {
+        var treeSprite = GetNode<Sprite>("Sprite");
+        TreeHeight = treeSprite.Texture.GetHeight() * treeSprite.Scale.y;
+    }
+
+    private void SpawnBranches()
+    {
+        var random = new RandomNumberGenerator();
+        random.Randomize();
+
+        bool isLeftBranch = System.Math.Round(random.Randf()) == 0;
+        float ySpace = TreeHeight * 0.75f / branchNumbers;
+
+        float yPos = -25;
         for (int i = 0; i < branchNumbers; ++i)
         {
-            float branchRotation = (float)GD.RandRange(minRotation, maxRotation);
+            float branchRotation = random.RandfRange(minRotation, maxRotation);
             float xPos = 12;
             if (isLeftBranch)
             {
@@ -42,13 +60,10 @@ public class Tree : Node2D
             AddChild(treeBranch);
 
             isLeftBranch = !isLeftBranch;
-            yPos -= 30;
+            float yOffset = random.RandfRange(minYOffset, maxYOffset);
+            yPos -= (ySpace + yOffset);
         }
-    }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+        ++branchNumbers;
+    }
 }
