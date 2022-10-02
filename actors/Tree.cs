@@ -62,7 +62,7 @@ public class Tree : Node2D
         branches = new List<TreeBranch>();
 
         bool isLeftBranch = System.Math.Round(randomGenerator.Randf()) == 0;
-        float yPos = -200;
+        float yPos = -180;
         for (int i = 0; i < branchCount; ++i)
         {
             float branchRotation = randomGenerator.RandfRange(minRotation, maxRotation);
@@ -81,7 +81,10 @@ public class Tree : Node2D
 
     public Vector2 GetBranchPosition()
     {
-        return branches[currentBranchIndex].GlobalPosition;
+        TreeBranch branch = branches[currentBranchIndex];
+        
+        float xOffset = branch.IsLeftBranch ? -branch.GetBranchWidth()*0.37f : branch.GetBranchWidth()*0.37f;
+        return branches[currentBranchIndex].GlobalPosition + new Vector2(xOffset, 0);
     }
 
     public void UpdateBranchIndex()

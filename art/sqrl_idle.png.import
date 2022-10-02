@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sqrl_dle1.png-0d18aeaa97cef35d1592b28d796c83ad.stex"
+path="res://.import/sqrl_idle.png-47f4aea0c2a9062ea389697808f3f48b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/sqrl_dle1.png"
-dest_files=[ "res://.import/sqrl_dle1.png-0d18aeaa97cef35d1592b28d796c83ad.stex" ]
+source_file="res://art/sqrl_idle.png"
+dest_files=[ "res://.import/sqrl_idle.png-47f4aea0c2a9062ea389697808f3f48b.stex" ]
 
 [params]
 

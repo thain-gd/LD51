@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://art/background.jpg" type="Texture" id=1]
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://sfx/chop.wav" type="AudioStream" id=4]
 [ext_resource path="res://actors/Tree.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sfx/falling_down.wav" type="AudioStream" id=6]
+[ext_resource path="res://font/CALIBRI.TTF" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+font_data = ExtResource( 7 )
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 3 )
@@ -34,6 +39,15 @@ texture = ExtResource( 1 )
 offset = Vector2( 70, -70 )
 current = true
 zoom = Vector2( 0.6, 0.6 )
+
+[node name="ScoreText" type="RichTextLabel" parent="Camera2D"]
+margin_left = -312.0
+margin_top = -279.0
+margin_right = -113.0
+margin_bottom = -222.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+fit_content_height = true
 
 [node name="TreeCutdownTimer" type="Timer" parent="."]
 autostart = true

@@ -4,50 +4,60 @@ using System;
 public class Player : Area2D
 {
     [Export]
-    public int Speed = 400;
+    private StreamTexture idleSprite;
+    
+    [Export]
+    private StreamTexture jumpSprite;
 
-    private AnimatedSprite animatedSprite;
+    [Export]
+    private StreamTexture landSprite;
+
+    private Sprite playerSprite;
+    private AudioStreamPlayer2D audioPlayer;
+    private Vector2 nextPosition;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        playerSprite = GetNode<Sprite>("Sprite");
+        playerSprite.Texture = idleSprite;
+
+        audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        nextPosition = Position;
     }
 
     public override void _Process(float delta)
     {
-        var velocity = Vector2.Zero; // The player's movement vector.
+        // if (velocity.Length() > 0)
+        // {
+        //     velocity = velocity.Normalized() * Speed;
+        //     playerSprite.Animation = "jump";
+        // }
+        // else
+        // {
+        //     playerSprite.Animation = "idle";
+        // }
 
-        if (Input.IsActionPressed("right_arrow"))
+        if ((nextPosition - Position).Length() <= 5f)
         {
-            velocity.x += 1;
-        }
-
-        if (Input.IsActionPressed("left_arrow"))
-        {
-            velocity.x -= 1;
-        }
-
-        if (Input.IsActionPressed("down_arrow"))
-        {
-            velocity.y += 1;
-        }
-
-        if (Input.IsActionPressed("up_arrow"))
-        {
-            velocity.y -= 1;
-        }
-        
-        if (velocity.Length() > 0)
-        {
-            velocity = velocity.Normalized() * Speed;
-            animatedSprite.Animation = "jump";
+            Position = nextPosition;
+            playerSprite.Texture = idleSprite;
         }
         else
         {
-            animatedSprite.Animation = "idle";
+            Position = Position.LinearInterpolate(nextPosition, 0.15f);
+            playerSprite.Texture = jumpSprite;
         }
+    }
 
-        Position += velocity * delta;
+    public void JumpTo(Vector2 position)
+    {
+        audioPlayer.Play();
+        nextPosition = position;
+    }
+
+    public void Land()
+    {
+
     }
 }

@@ -10,6 +10,8 @@ public class GameController : Node2D
     [Export]
     private PackedScene playerPrefab;
 
+    private RichTextLabel scoreText;
+
     [Export]
     private float treeXSpace = 250;
 
@@ -29,8 +31,8 @@ public class GameController : Node2D
     private float treeXPos = -250;
     private int treeChopSecondCount = 0;
     private bool isTreeFalling;
+    private int branchPassed;
     private const int InitialTrees = 3;
-
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -39,6 +41,7 @@ public class GameController : Node2D
         treeContainer = GetNode<Node2D>("TreeContainer");
         choppingPlayer = GetNode<AudioStreamPlayer2D>("ChoppingPlayer");
         fallDownPlayer = GetNode<AudioStreamPlayer2D>("FallDownPlayer");
+        scoreText = camera2d.GetNode<RichTextLabel>("ScoreText");
 
         SpawnTrees();
         SpawnPlayer();
@@ -59,6 +62,7 @@ public class GameController : Node2D
     {
         player = (Player)playerPrefab.Instance();
         player.Position = trees[currTreeIndex].GetBranchPosition();
+        trees[currTreeIndex].UpdateBranchIndex();
 
         AddChild(player);
     }
@@ -68,7 +72,8 @@ public class GameController : Node2D
         if (Input.IsActionJustPressed("proceed"))
         {
             Tree currentTree = trees[currTreeIndex];
-            player.Position = currentTree.GetBranchPosition();
+
+            player.JumpTo(currentTree.GetBranchPosition());
 
             if (currTreeIndex == trees.Count - 1)
             {
@@ -83,6 +88,8 @@ public class GameController : Node2D
             {
                 currentTree.UpdateBranchIndex();
             }
+
+            UpdateScore();
         }
 
         camera2d.Position = camera2d.Position.LinearInterpolate(player.Position, 0.12f);
@@ -140,5 +147,11 @@ public class GameController : Node2D
                 GetNode<Timer>("TreeCutdownTimer").Stop();
             }
         }
+    }
+
+    public void UpdateScore()
+    {
+        ++branchPassed;
+        scoreText.Text = branchPassed.ToString();
     }
 }
