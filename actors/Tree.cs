@@ -62,7 +62,7 @@ public class Tree : Node2D
         branches = new List<TreeBranch>();
 
         bool isLeftBranch = System.Math.Round(randomGenerator.Randf()) == 0;
-        float yPos = -180;
+        float yPos = -220;
         for (int i = 0; i < branchCount; ++i)
         {
             float branchRotation = randomGenerator.RandfRange(minRotation, maxRotation);
