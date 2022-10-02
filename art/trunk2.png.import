@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/squirrel_idle.png-d9e87e85129391fcff7cfdf6d0293c7b.stex"
+path="res://.import/trunk2.png-d88a8622610a1f805aeb5ccb746505cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/squirrel_idle.png"
-dest_files=[ "res://.import/squirrel_idle.png-d9e87e85129391fcff7cfdf6d0293c7b.stex" ]
+source_file="res://art/trunk2.png"
+dest_files=[ "res://.import/trunk2.png-d88a8622610a1f805aeb5ccb746505cb.stex" ]
 
 [params]
 

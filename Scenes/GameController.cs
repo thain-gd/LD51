@@ -16,19 +16,29 @@ public class GameController : Node2D
     [Export]
     private int currentBranchCount = 3;
 
+    [Export]
+    private AudioStream chopSfx;
+
+    [Export]
+    private AudioStream treeFallSfx;
+
     private Node2D camera2d;
     private Node2D treeContainer;
+    private AudioStreamPlayer2D audioPlayer2d;
     private List<Tree> trees;
     private Player player;
     private int currTreeIndex;
     private float treeXPos = -250;
-    private const int MaxTrees = 4;
+    private int treeChopSecondCount = 0;
+    private const int MaxTrees = 3;
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         camera2d = GetNode<Node2D>("Camera2D");
         treeContainer = GetNode<Node2D>("TreeContainer");
+        audioPlayer2d = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 
         SpawnTrees();
         SpawnPlayer();
@@ -48,7 +58,7 @@ public class GameController : Node2D
     private void SpawnPlayer()
     {
         player = (Player)playerPrefab.Instance();
-        player.Position = trees[currTreeIndex].Position;
+        player.Position = trees[currTreeIndex].GetBranchPosition();
 
         AddChild(player);
     }
@@ -57,10 +67,19 @@ public class GameController : Node2D
     {
         if (Input.IsActionJustPressed("proceed"))
         {
-            currTreeIndex = (currTreeIndex + 1) % MaxTrees;
-            player.Position = trees[currTreeIndex].Position;
+            Tree currentTree = trees[currTreeIndex];
+            player.Position = currentTree.GetBranchPosition();
+
+            if (currentTree.IsLastBranch())
+            {
+                currTreeIndex = (currTreeIndex + 1) % MaxTrees;
+            }
+            else
+            {
+                currentTree.UpdateBranchIndex();
+            }
             
-            if (currTreeIndex == 3)
+            if (currTreeIndex == 2)
             {
                 UpdateTrees();
             }
@@ -89,7 +108,7 @@ public class GameController : Node2D
     {
         Tree tree = (Tree)treePrefab.Instance();
         tree.Initialize(currentBranchCount);
-        tree.Position = new Vector2(treeXPos, 100);
+        tree.Position = new Vector2(treeXPos, 300);
 
         treeContainer.AddChild(tree);
         trees.Add(tree);
@@ -101,5 +120,22 @@ public class GameController : Node2D
     private void UpdateCurrentTreeIndex()
     {
         --currTreeIndex;
+    }
+
+    public void OnTreeCutdownTimerTimeout()
+    {
+        audioPlayer2d.Stream = chopSfx;
+        audioPlayer2d.Play();
+
+        ++treeChopSecondCount;
+        GD.Print(treeChopSecondCount);
+        // Falling tree
+        if (treeChopSecondCount == 10)
+        {
+            treeChopSecondCount = 0;
+
+            audioPlayer2d.Stream = treeFallSfx;
+            audioPlayer2d.Play();
+        }
     }
 }

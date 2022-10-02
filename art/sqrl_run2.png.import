@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/squirrel_jump.jpg-00cebe5522ba59fbc165ad3561a18a1d.stex"
+path="res://.import/sqrl_run2.png-ac4c7ce8a7be2383c1d71dd9303ba7ca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/squirrel_jump.jpg"
-dest_files=[ "res://.import/squirrel_jump.jpg-00cebe5522ba59fbc165ad3561a18a1d.stex" ]
+source_file="res://art/sqrl_run2.png"
+dest_files=[ "res://.import/sqrl_run2.png-ac4c7ce8a7be2383c1d71dd9303ba7ca.stex" ]
 
 [params]
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://actors/Trunk.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/TreeBranch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/Tree.cs" type="Script" id=3]
+[ext_resource path="res://art/trunk1.png" type="Texture" id=4]
+[ext_resource path="res://art/trunk2.png" type="Texture" id=5]
+
+[node name="Tree" type="Node2D"]
+script = ExtResource( 3 )
+treeBranchPrefab = ExtResource( 2 )
+trunkSprites = [ ExtResource( 4 ), ExtResource( 5 ) ]
+trunkPrefab = ExtResource( 1 )
+minOffset = Vector2( 10, 65 )
+maxOffset = Vector2( 50, 90 )
+maxRotation = 25.0
