@@ -6,12 +6,12 @@ public class Player : Area2D
     [Export]
     public int Speed = 400;
 
-    private AnimatedSprite _animatedSprite;
+    private AnimatedSprite animatedSprite;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
     }
 
     public override void _Process(float delta)
@@ -37,15 +37,15 @@ public class Player : Area2D
         {
             velocity.y -= 1;
         }
-
+        
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            _animatedSprite.Play();
+            animatedSprite.Animation = "jump";
         }
         else
         {
-            _animatedSprite.Stop();
+            animatedSprite.Animation = "idle";
         }
 
         Position += velocity * delta;

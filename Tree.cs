@@ -18,14 +18,17 @@ public class Tree : Node2D
     [Export]
     private float maxRotation;
 
-    private static int branchNumbers = 5;
-
     private float TreeHeight;
 
     public override void _Ready()
     {
+        
+    }
+
+    public void Initialize(int branchCount)
+    {
         GetTreeHeight();
-        SpawnBranches();
+        SpawnBranches(branchCount);
     }
 
     private void GetTreeHeight()
@@ -34,16 +37,16 @@ public class Tree : Node2D
         TreeHeight = treeSprite.Texture.GetHeight() * treeSprite.Scale.y;
     }
 
-    private void SpawnBranches()
+    private void SpawnBranches(int branchCount)
     {
         var random = new RandomNumberGenerator();
         random.Randomize();
 
         bool isLeftBranch = System.Math.Round(random.Randf()) == 0;
-        float ySpace = TreeHeight * 0.75f / branchNumbers;
+        float ySpace = TreeHeight * 0.75f / branchCount;
 
         float yPos = -25;
-        for (int i = 0; i < branchNumbers; ++i)
+        for (int i = 0; i < branchCount; ++i)
         {
             float branchRotation = random.RandfRange(minRotation, maxRotation);
             float xPos = 12;
@@ -63,7 +66,5 @@ public class Tree : Node2D
             float yOffset = random.RandfRange(minYOffset, maxYOffset);
             yPos -= (ySpace + yOffset);
         }
-
-        ++branchNumbers;
     }
 }
