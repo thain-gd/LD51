@@ -145,6 +145,7 @@ public class GameController : Node2D
             if (currTreeIndex == 0)
             {
                 GetNode<Timer>("TreeCutdownTimer").Stop();
+                ShowGameOverScreen();
             }
         }
     }
@@ -153,5 +154,15 @@ public class GameController : Node2D
     {
         ++branchPassed;
         scoreText.Text = branchPassed.ToString();
+    }
+
+    private void ShowGameOverScreen()
+    {
+        camera2d.GetNode<Control>("GameOverScreen").Visible = true;
+    }
+
+    public void PlayAgain()
+    {
+        GetTree().ReloadCurrentScene();
     }
 }
