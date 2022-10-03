@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://art/background.png" type="Texture" id=1]
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=2]
@@ -6,14 +6,14 @@
 [ext_resource path="res://scenes/MathScreen.cs" type="Script" id=4]
 [ext_resource path="res://actors/Tree.tscn" type="PackedScene" id=5]
 [ext_resource path="res://font/Montague.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://font/CALIBRI.TTF" type="DynamicFontData" id=7]
 [ext_resource path="res://art/background_extend.png" type="Texture" id=8]
 [ext_resource path="res://art/sqrl_ded.png" type="Texture" id=9]
 [ext_resource path="res://art/math_menu_frame.png" type="Texture" id=10]
+[ext_resource path="res://art/acorn_silhouette.png" type="Texture" id=11]
 
-[sub_resource type="DynamicFont" id=1]
-size = 120
-font_data = ExtResource( 7 )
+[sub_resource type="DynamicFont" id=7]
+size = 80
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.929412, 0.94902, 0.917647, 0.733333 )
@@ -22,9 +22,13 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=5]
-size = 100
-font_data = ExtResource( 7 )
+[sub_resource type="DynamicFont" id=8]
+size = 60
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 100
@@ -298,13 +302,13 @@ current = true
 zoom = Vector2( 0.7, 0.7 )
 
 [node name="ScoreText" type="RichTextLabel" parent="Camera2D"]
-margin_left = -387.0
-margin_top = -319.0
-margin_right = -188.0
-margin_bottom = -262.0
-custom_fonts/normal_font = SubResource( 1 )
+margin_left = -381.0
+margin_top = -331.0
+margin_right = -218.0
+margin_bottom = -195.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 7 )
 text = "0"
-fit_content_height = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 layer = 10
@@ -332,42 +336,83 @@ texture = ExtResource( 10 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Add" type="Button" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
+[node name="Add" type="TextureButton" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 112.0
-margin_top = -186.0
-margin_right = 212.0
-margin_bottom = -80.0
-custom_fonts/font = SubResource( 5 )
+margin_left = 100.0
+margin_top = -198.0
+margin_right = 228.0
+margin_bottom = -70.0
+texture_normal = ExtResource( 11 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection/Add"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -19.5
+margin_top = -40.0
+margin_right = 19.5
+margin_bottom = 40.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 8 )
 text = "+"
 
-[node name="Subtract" type="Button" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
+[node name="Subtract" type="TextureButton" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 267.0
-margin_top = -186.0
-margin_right = 367.0
-margin_bottom = -80.0
-custom_fonts/font = SubResource( 5 )
-text = "-"
+margin_left = -64.0
+margin_top = -198.0
+margin_right = 64.0
+margin_bottom = -70.0
+texture_normal = ExtResource( 11 )
 
-[node name="Multiply" type="Button" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection/Subtract"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -66.0
+margin_right = 34.0
+margin_bottom = 15.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 8 )
+text = "_"
+
+[node name="Multiply" type="TextureButton" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection"]
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 419.0
-margin_top = -186.0
-margin_right = 519.0
-margin_bottom = -80.0
-custom_fonts/font = SubResource( 5 )
+margin_left = -228.0
+margin_top = -198.0
+margin_right = -100.0
+margin_bottom = -70.0
+texture_normal = ExtResource( 11 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/MathScreen/OperationSelection/Multiply"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -36.0
+margin_right = 24.0
+margin_bottom = 44.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 8 )
 text = "x"
 
 [node name="Equation" type="Control" parent="Camera2D/CanvasLayer/MathScreen"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -79.0
-margin_right = 40.0
-margin_bottom = -39.0
+margin_left = 11.0
+margin_top = -97.0
+margin_right = 51.0
+margin_bottom = -57.0
 
 [node name="Number" type="RichTextLabel" parent="Camera2D/CanvasLayer/MathScreen/Equation"]
 anchor_top = 0.5
