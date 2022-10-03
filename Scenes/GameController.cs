@@ -152,8 +152,12 @@ public class GameController : Node2D
     private void SpawnPlayer()
     {
         player = (Player)playerPrefab.Instance();
-        player.Position = trees[currTreeIndex].GetBranchPosition();
-        trees[currTreeIndex].UpdateBranchIndex();
+        player.Initialize();
+
+        bool isLeftBranch = false;
+        Vector2 branchPos = trees[currTreeIndex].GetBranchPositionAndDirection(out isLeftBranch); 
+        player.Position = branchPos;
+        player.SetDirection(isLeftBranch);
 
         AddChild(player);
 
@@ -268,25 +272,30 @@ public class GameController : Node2D
     private void GoToNextBranch()
     {
         Tree currentTree = trees[currTreeIndex];
-
-        player.JumpTo(currentTree.GetBranchPosition());
-
-        if (currTreeIndex == trees.Count - 1)
-        {
-            SpawnNewTree();
-        }
-
-        if (currentTree.IsLastBranch())
+        bool isLastBranch = currentTree.IsLastBranch();
+        if (isLastBranch)
         {
             currTreeIndex = (currTreeIndex + 1) % trees.Count;
+            currentTree = trees[currTreeIndex];
         }
         else
         {
             currentTree.UpdateBranchIndex();
         }
 
+        bool isLeftBranch = false;
+        Vector2 branchPos = currentTree.GetBranchPositionAndDirection(out isLeftBranch);
+        player.JumpTo(branchPos, isLeftBranch, isLastBranch);
+
+        if (currTreeIndex == trees.Count - 1)
+        {
+            SpawnNewTree();
+        }
+
         UpdateScore();
         PickPair();
+
+        GD.Print(currTreeIndex);
     }
 
     public void BackToMainMenu()

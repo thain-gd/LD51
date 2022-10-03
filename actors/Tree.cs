@@ -79,11 +79,12 @@ public class Tree : Node2D
         }
     }
 
-    public Vector2 GetBranchPosition()
+    public Vector2 GetBranchPositionAndDirection(out bool isLeftBranch)
     {
         TreeBranch branch = branches[currentBranchIndex];
         
-        float xOffset = branch.IsLeftBranch ? -branch.GetBranchWidth()*0.37f : branch.GetBranchWidth()*0.37f;
+        isLeftBranch = branch.IsLeftBranch;
+        float xOffset = isLeftBranch ? -branch.GetBranchWidth()*0.37f : branch.GetBranchWidth()*0.37f;
         return branches[currentBranchIndex].GlobalPosition + new Vector2(xOffset, 0);
     }
 
