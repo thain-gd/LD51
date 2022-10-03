@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://sounds/bgm.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoloads/MusicController.cs" type="Script" id=2]
+[ext_resource path="res://sounds/numberjack_theme.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/numberjack_loop.wav" type="AudioStream" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
+startMusic = ExtResource( 3 )
+loopMusic = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
 volume_db = -20.0
