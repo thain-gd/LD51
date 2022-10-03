@@ -4,9 +4,9 @@
 [ext_resource path="res://art/sqrl_idle.png" type="Texture" id=2]
 [ext_resource path="res://art/sqrl_run1.png" type="Texture" id=3]
 [ext_resource path="res://art/sqrl_run2.png" type="Texture" id=4]
-[ext_resource path="res://sfx/jump.wav" type="AudioStream" id=5]
-[ext_resource path="res://sfx/chop.wav" type="AudioStream" id=6]
-[ext_resource path="res://sfx/falling_down.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/jump.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/chop.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/falling_down.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 42 )

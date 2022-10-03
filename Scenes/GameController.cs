@@ -163,11 +163,6 @@ public class GameController : Node2D
 
     public override void _Process(float delta)
     {
-        // if (Input.IsActionJustPressed("proceed"))
-        // {
-        //     GoToNextBranch();
-        // }
-
         camera2d.Position = camera2d.Position.LinearInterpolate(player.Position, 0.12f);
     
         if (isTreeFalling)
@@ -220,6 +215,7 @@ public class GameController : Node2D
             if (currTreeIndex == 0)
             {
                 GetNode<Timer>("TreeCutdownTimer").Stop();
+                GetParent().GetNode<MusicController>("MusicController").Stop();
                 ShowGameOverScreen();
             }
         }
@@ -240,6 +236,7 @@ public class GameController : Node2D
     public void PlayAgain()
     {
         GetTree().ReloadCurrentScene();
+        GetParent().GetNode<MusicController>("MusicController").Start();
     }
 
     public void SelectAdd()
@@ -290,5 +287,10 @@ public class GameController : Node2D
 
         UpdateScore();
         PickPair();
+    }
+
+    public void BackToMainMenu()
+    {
+        GetTree().ChangeScene("res://ui/MainMenu.tscn");
     }
 }

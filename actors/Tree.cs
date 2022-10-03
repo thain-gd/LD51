@@ -69,7 +69,7 @@ public class Tree : Node2D
             float xPos =  randomGenerator.RandfRange(-minOffset.x, -maxOffset.x);
 
             TreeBranch treeBranch = (TreeBranch)treeBranchPrefab.Instance();
-            treeBranch.Initialize(isLeftBranch, (i+1)/(float)branchCount, new Vector2(xPos, yPos), branchRotation);
+            treeBranch.Initialize(isLeftBranch, (i+1)/(float)branchCount, new Vector2(xPos, yPos), 0);
             
             AddChild(treeBranch);
             branches.Add(treeBranch);
